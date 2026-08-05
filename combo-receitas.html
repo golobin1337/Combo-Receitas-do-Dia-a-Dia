@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Combo Receitas do Dia a Dia</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Nunito:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --marrom: #3E1F00;
+    --marrom-medio: #6B3A1F;
+    --dourado: #C9973A;
+    --dourado-claro: #FDF3E3;
+    --creme: #FBF5EE;
+    --creme-escuro: #F2E8D9;
+    --verde: #4A7C59;
+    --verde-claro: #EAF4EE;
+    --rosa: #C2185B;
+    --rosa-claro: #FCE4EC;
+    --texto: #1E0F00;
+    --texto-muted: #6B4F3A;
+  }
+
+  body {
+    font-family: 'Nunito', sans-serif;
+    color: var(--texto);
+    background: var(--creme);
+    overflow-x: hidden;
+  }
+
+  /* TOPBAR */
+  .topbar {
+    background: var(--marrom);
+    color: white;
+    text-align: center;
+    padding: 10px 20px;
+    font-size: 14px;
+    font-weight: 600;
+  }
+  .topbar span {
+    background: var(--dourado);
+    color: var(--marrom);
+    border-radius: 20px;
+    padding: 2px 10px;
+    font-weight: 800;
+    margin: 0 4px;
+  }
+
+  /* HERO */
+  .hero {
+    background: linear-gradient(180deg, #FBF5EE 0%, #F2E8D9 100%);
+    padding: 56px 24px 48px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    border-bottom: 3px solid var(--dourado);
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -100px; right: -100px;
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(201,151,58,0.1) 0%, transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+  }
+  .badge-exclusivo {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--dourado);
+    color: var(--marrom);
+    border-radius: 30px;
+    padding: 6px 18px;
+    font-size: 13px;
+    font-weight: 800;
+    margin-bottom: 24px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+  .badge-exclusivo .dot {
+    width: 7px; height: 7px;
+    background: var(--marrom);
+    border-radius: 50%;
+    animation: pulse 1.5s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.5); }
+  }
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(30px, 5.5vw, 54px);
+    font-weight: 900;
+    color: var(--marrom);
+    line-height: 1.15;
+    margin-bottom: 16px;
+  }
+  .hero h1 em { font-style: normal; color: var(--dourado); }
+  .hero-sub {
+    font-size: clamp(15px, 2.2vw, 19px);
+    color: var(--texto-muted);
+    max-width: 640px;
+    margin: 0 auto 32px;
+    line-height: 1.65;
+    font-weight: 500;
+  }
+  .hero-sub strong { color: var(--marrom); font-weight: 800; }
+
+  /* PLACEHOLDER IMAGEM HERO */
+  .hero-img-placeholder {
+    max-width: 680px;
+    width: 100%;
+    margin: 0 auto 36px;
+    display: block;
+    border-radius: 20px;
+    /* SUBSTITUA ESTE BLOCO PELA TAG <img> QUANDO TIVER A IMAGEM */
+  }
+  .hero-img-placeholder img {
+    width: 100%;
+    border-radius: 20px;
+    box-shadow: 0 12px 48px rgba(62,31,0,0.18);
+    display: block;
+  }
+
+  .stats-row {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 36px;
+  }
+  .stat-pill {
+    background: white;
+    border: 2px solid var(--dourado);
+    border-radius: 40px;
+    padding: 10px 20px;
+    font-weight: 700;
+    font-size: 15px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--marrom);
+  }
+  .cta-btn {
+    display: inline-block;
+    background: linear-gradient(135deg, var(--dourado) 0%, #A67520 100%);
+    color: white;
+    font-family: 'Nunito', sans-serif;
+    font-size: clamp(18px, 3vw, 22px);
+    font-weight: 800;
+    padding: 18px 36px;
+    border-radius: 50px;
+    text-decoration: none;
+    border: none;
+    box-shadow: 0 6px 24px rgba(201,151,58,0.45);
+    transition: transform 0.2s, box-shadow 0.2s;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    max-width: 100%;
+  }
+  .cta-btn::after {
+    content: '';
+    position: absolute;
+    top: 0; left: -100%;
+    width: 60%; height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transform: skewX(-20deg);
+    animation: shimmer 3s ease-in-out infinite;
+  }
+  @keyframes shimmer { 0% { left: -100%; } 100% { left: 200%; } }
+  .cta-btn:hover { transform: translateY(-3px); box-shadow: 0 10px 32px rgba(201,151,58,0.55); }
+
+  .preco-hero { margin-top: 18px; font-size: 15px; color: var(--texto-muted); }
+  .preco-hero strong { font-size: 28px; color: var(--marrom); font-weight: 800; }
+  .preco-hero s { opacity: 0.5; }
+  .garantia-mini {
+    display: flex; align-items: center; justify-content: center;
+    gap: 6px; font-size: 13px; color: var(--texto-muted); margin-top: 10px;
+  }
+
+  /* SEÇÕES */
+  section { padding: 64px 24px; }
+  .container { max-width: 900px; margin: 0 auto; }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(22px, 4vw, 36px);
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 12px;
+    color: var(--marrom);
+    line-height: 1.25;
+  }
+  .section-sub {
+    text-align: center;
+    color: var(--texto-muted);
+    font-size: 17px;
+    max-width: 600px;
+    margin: 0 auto 40px;
+    line-height: 1.6;
+  }
+
+  /* DOR */
+  .sec-dor {
+    background: #FFF8F0;
+    border-top: 4px solid var(--dourado);
+    border-bottom: 4px solid var(--dourado);
+  }
+  .dor-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 16px;
+  }
+  .dor-card {
+    background: white;
+    border-radius: 16px;
+    padding: 20px 22px;
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    border: 1.5px solid #F0D9BE;
+  }
+  .dor-icon { font-size: 26px; flex-shrink: 0; margin-top: 2px; }
+  .dor-card p { font-size: 15px; color: var(--texto-muted); line-height: 1.55; }
+  .dor-card p strong { color: var(--texto); font-weight: 700; }
+
+  /* PRODUTOS */
+  .sec-produtos { background: white; }
+  .produtos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 24px;
+  }
+  .produto-card {
+    border-radius: 20px;
+    padding: 32px 24px;
+    text-align: center;
+    border: 2px solid;
+    transition: transform 0.2s;
+  }
+  .produto-card:hover { transform: translateY(-4px); }
+  .produto-card.escuro { background: #1A0A00; border-color: var(--dourado); }
+  .produto-card.claro { background: var(--verde-claro); border-color: #A5C8AE; }
+  .produto-card.rosa { background: var(--rosa-claro); border-color: #F48FB1; }
+  .produto-card .p-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 52px; font-weight: 900;
+    display: block; margin-bottom: 4px;
+  }
+  .produto-card.escuro .p-num { color: var(--dourado); }
+  .produto-card.claro .p-num { color: var(--verde); }
+  .produto-card.rosa .p-num { color: var(--rosa); }
+  .produto-card h3 { font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 700; margin-bottom: 10px; }
+  .produto-card.escuro h3 { color: white; }
+  .produto-card.claro h3, .produto-card.rosa h3 { color: var(--marrom); }
+  .produto-card p { font-size: 14px; line-height: 1.55; }
+  .produto-card.escuro p { color: rgba(255,255,255,0.7); }
+  .produto-card.claro p, .produto-card.rosa p { color: var(--texto-muted); }
+  .produto-card .p-icon { font-size: 40px; display: block; margin-bottom: 12px; }
+
+  /* CARROSSEL */
+  .sec-carrossel { background: var(--creme-escuro); padding: 64px 24px; }
+  .carrossel-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    position: relative;
+    margin-top: 8px;
+  }
+  .carrossel-track-outer {
+    overflow: hidden;
+    flex: 1;
+    border-radius: 16px;
+  }
+  .carrossel-track {
+    display: flex;
+    gap: 16px;
+    transition: transform 0.4s ease;
+    will-change: transform;
+  }
+  .carr-slide {
+    flex: 0 0 calc((100% - 32px) / 3);
+    border-radius: 14px;
+    overflow: hidden;
+    aspect-ratio: 3/4;
+  }
+  .carr-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .carr-placeholder {
+    background: #E8D8C0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--texto-muted);
+    letter-spacing: 0.5px;
+    border: 2px dashed #C8A878;
+    /* REMOVA ESTA CLASSE E O ELEMENTO QUANDO ADICIONAR IMAGENS REAIS */
+  }
+  .carr-btn {
+    background: var(--dourado);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 44px; height: 44px;
+    font-size: 26px;
+    line-height: 1;
+    cursor: pointer;
+    flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    transition: background 0.2s, transform 0.2s;
+    box-shadow: 0 2px 8px rgba(62,31,0,0.2);
+  }
+  .carr-btn:hover { background: #A67520; transform: scale(1.08); }
+  .carr-dots {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 20px;
+  }
+  .carr-dot {
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    background: #D4B896;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.2s;
+    border: none;
+  }
+  .carr-dot.ativo { background: var(--dourado); transform: scale(1.3); }
+
+  @media (max-width: 600px) {
+    .carr-slide { flex: 0 0 calc((100% - 16px) / 2); }
+    .carr-btn { width: 36px; height: 36px; font-size: 20px; }
+  }
+  @media (max-width: 400px) {
+    .carr-slide { flex: 0 0 100%; }
+  }
+
+  /* OFERTA */
+  .sec-oferta {
+    background: linear-gradient(135deg, var(--marrom) 0%, var(--marrom-medio) 100%);
+    color: white;
+  }
+  .oferta-box {
+    max-width: 680px;
+    margin: 0 auto;
+    background: rgba(255,255,255,0.08);
+    border-radius: 28px;
+    border: 2px solid rgba(201,151,58,0.5);
+    padding: 44px 40px;
+    text-align: center;
+  }
+  .oferta-box .titulo {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(22px, 4vw, 30px);
+    font-weight: 700;
+    margin-bottom: 6px;
+    color: var(--dourado);
+  }
+  .oferta-box .subtitulo { font-size: 16px; opacity: 0.8; margin-bottom: 28px; }
+  .inclui-lista {
+    list-style: none;
+    text-align: left;
+    margin-bottom: 28px;
+    display: grid;
+    gap: 12px;
+  }
+  .inclui-lista li {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 15px;
+    font-weight: 600;
+  }
+  .inclui-lista li::before {
+    content: '✓';
+    background: var(--dourado);
+    color: var(--marrom);
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 900;
+    font-size: 13px;
+    flex-shrink: 0;
+  }
+  .preco-box {
+    background: rgba(255,255,255,0.1);
+    border-radius: 16px;
+    padding: 24px;
+    margin-bottom: 28px;
+    border: 1px solid rgba(201,151,58,0.4);
+  }
+  .preco-de { font-size: 16px; opacity: 0.6; text-decoration: line-through; margin-bottom: 4px; }
+  .preco-por {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(48px, 10vw, 64px);
+    font-weight: 900;
+    line-height: 1;
+    color: var(--dourado);
+  }
+  .preco-por span { font-size: 24px; vertical-align: super; font-weight: 700; }
+  .preco-por .cents { font-size: 36px; vertical-align: baseline; }
+  .preco-detalhe { font-size: 14px; opacity: 0.75; margin-top: 6px; }
+  .cta-btn-gold {
+    display: block;
+    background: linear-gradient(135deg, var(--dourado) 0%, #A67520 100%);
+    color: white;
+    font-family: 'Nunito', sans-serif;
+    font-size: clamp(17px, 3vw, 22px);
+    font-weight: 800;
+    padding: 18px 36px;
+    border-radius: 50px;
+    text-decoration: none;
+    cursor: pointer;
+    border: none;
+    box-shadow: 0 6px 24px rgba(0,0,0,0.3);
+    transition: transform 0.2s, box-shadow 0.2s;
+    width: 100%;
+  }
+  .cta-btn-gold:hover { transform: translateY(-3px); box-shadow: 0 10px 32px rgba(0,0,0,0.4); }
+  .garantia-box {
+    margin-top: 18px;
+    display: flex; align-items: center; justify-content: center;
+    gap: 8px; font-size: 14px; opacity: 0.8;
+    flex-wrap: wrap; text-align: center;
+  }
+
+  /* GARANTIA */
+  .sec-garantia { background: var(--creme-escuro); }
+  .garantia-inner {
+    max-width: 600px;
+    margin: 0 auto;
+    background: white;
+    border-radius: 24px;
+    padding: 40px;
+    text-align: center;
+    border: 2px solid var(--dourado);
+  }
+  .garantia-inner .g-big { font-size: 72px; margin-bottom: 16px; display: block; }
+  .garantia-inner h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px; font-weight: 700;
+    color: var(--marrom); margin-bottom: 12px;
+  }
+  .garantia-inner p { font-size: 16px; color: var(--texto-muted); line-height: 1.65; }
+
+  /* FOOTER */
+  footer {
+    background: var(--marrom);
+    color: rgba(255,255,255,0.6);
+    text-align: center;
+    padding: 28px 24px;
+    font-size: 13px;
+    line-height: 1.7;
+  }
+  footer strong { color: rgba(255,255,255,0.9); }
+
+  /* RESPONSIVE */
+  @media (max-width: 600px) {
+    section { padding: 48px 16px; }
+    .oferta-box { padding: 28px 20px; }
+    .preco-por { font-size: 48px; }
+    .garantia-inner { padding: 28px 20px; }
+    .stat-pill { font-size: 13px; padding: 8px 14px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  🔥 Oferta exclusiva para membros do grupo — <span>só por tempo limitado</span>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="badge-exclusivo">
+    <span class="dot"></span>
+    Novidade exclusiva para o grupo
+  </div>
+
+  <h1>
+    Mais de <em>700 receitas</em><br>
+    pra transformar sua<br>
+    cozinha do dia a dia
+  </h1>
+
+  <p class="hero-sub">
+    <strong>3 guias completos num único combo</strong> — ovos, receitas sem restrição e sobremesas saudáveis. Tudo que você precisa pra cozinhar bem sem complicar.
+  </p>
+
+  <!-- IMAGEM DO COMBO AQUI — substitua este comentário por:
+  <div class="hero-img-placeholder">
+    <img src="sua-imagem.jpg" alt="Combo Receitas do Dia a Dia">
+  </div>
+  -->
+
+  <div class="stats-row">
+    <div class="stat-pill">🥚 365 receitas de ovos</div>
+    <div class="stat-pill">🌿 +300 sem restrição</div>
+    <div class="stat-pill">🍮 +100 sobremesas</div>
+  </div>
+
+  <a href="https://mundoconhecimento.mycartpanda.com/checkout/211885139:1" class="cta-btn">
+    QUERO O COMBO AGORA — R$24,90 →
+  </a>
+
+  <div class="preco-hero">
+    De <s>R$74,70</s> por apenas <strong>R$24,90</strong> — pagamento único
+  </div>
+
+  <div class="garantia-mini">
+    🛡️ Garantia de 7 dias — se não gostar, devolvemos tudo
+  </div>
+</section>
+
+<!-- DOR -->
+<section class="sec-dor">
+  <div class="container">
+    <h2 class="section-title">Você se identifica com alguma dessas? 👇</h2>
+    <p class="section-sub">Se sim, esse combo foi feito exatamente pra você.</p>
+    <div class="dor-grid">
+      <div class="dor-card">
+        <span class="dor-icon">😩</span>
+        <p><strong>Todo dia a mesma dúvida</strong> — "o que eu faço hoje?" — e sempre acaba no improviso.</p>
+      </div>
+      <div class="dor-card">
+        <span class="dor-icon">🥚</span>
+        <p><strong>Faz ovos do mesmo jeito</strong> há anos e não sabe que dá pra fazer 365 pratos completamente diferentes.</p>
+      </div>
+      <div class="dor-card">
+        <span class="dor-icon">🚫</span>
+        <p><strong>Tem restrição alimentar na família</strong> e não sabe o que cozinhar sem abrir mão do sabor.</p>
+      </div>
+      <div class="dor-card">
+        <span class="dor-icon">🍰</span>
+        <p><strong>Quer comer sobremesa sem culpa</strong> mas não encontra receitas saudáveis que realmente sejam gostosas.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUTOS -->
+<section class="sec-produtos">
+  <div class="container">
+    <h2 class="section-title">O que vem no combo 📦</h2>
+    <p class="section-sub">3 guias completos, acesso imediato, pra sempre.</p>
+    <div class="produtos-grid">
+      <div class="produto-card escuro">
+        <span class="p-icon">🥚</span>
+        <span class="p-num">365</span>
+        <h3>Maneiras de Preparar Ovos</h3>
+        <p>Uma receita diferente pra cada dia do ano — do café da manhã ao jantar.</p>
+      </div>
+      <div class="produto-card claro">
+        <span class="p-icon">🌿</span>
+        <span class="p-num">+300</span>
+        <h3>Receitas Sem Açúcar, Glúten e Lactose</h3>
+        <p>Pra quem tem restrição mas não quer abrir mão do sabor no dia a dia.</p>
+      </div>
+      <div class="produto-card rosa">
+        <span class="p-icon">🍮</span>
+        <span class="p-num">+100</span>
+        <h3>Receitas de Sobremesas Saudáveis</h3>
+        <p>Doces gostosos e nutritivos pra toda a família — sem culpa nenhuma.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CARROSSEL -->
+<section class="sec-carrossel">
+  <div class="container">
+    <h2 class="section-title">Você está preparada para incluir receitas gostosas como essas no seu dia a dia?</h2>
+    <p class="section-sub">Olha só o que te espera dentro do combo 👇</p>
+    <div class="carrossel-wrapper">
+      <button class="carr-btn carr-prev" onclick="moverCarrossel(-1)" aria-label="Anterior">&#8249;</button>
+      <div class="carrossel-track-outer">
+        <div class="carrossel-track" id="carrosselTrack">
+          <!-- SUBSTITUA OS ELEMENTOS .carr-placeholder pelas suas imagens:
+               <div class="carr-slide"><img src="imagem1.jpg" alt="Receita 1"></div>
+          -->
+          <div class="carr-slide carr-placeholder">IMAGEM 1</div>
+          <div class="carr-slide carr-placeholder">IMAGEM 2</div>
+          <div class="carr-slide carr-placeholder">IMAGEM 3</div>
+          <div class="carr-slide carr-placeholder">IMAGEM 4</div>
+          <div class="carr-slide carr-placeholder">IMAGEM 5</div>
+          <div class="carr-slide carr-placeholder">IMAGEM 6</div>
+        </div>
+      </div>
+      <button class="carr-btn carr-next" onclick="moverCarrossel(1)" aria-label="Próximo">&#8250;</button>
+    </div>
+    <div class="carr-dots" id="carrDots"></div>
+  </div>
+</section>
+
+<!-- OFERTA -->
+<section class="sec-oferta" id="oferta">
+  <div class="container">
+    <div class="oferta-box">
+      <div class="titulo">Combo Receitas do Dia a Dia</div>
+      <div class="subtitulo">3 guias · +700 receitas · Acesso imediato</div>
+
+      <ul class="inclui-lista">
+        <li>365 Maneiras de Preparar Ovos 🥚</li>
+        <li>+300 Receitas Sem Açúcar, Glúten e Lactose 🌿</li>
+        <li>+100 Receitas de Sobremesas Saudáveis 🍮</li>
+        <li>Acesso vitalício pelo celular ou computador</li>
+        <li>Garantia total de 7 dias</li>
+      </ul>
+
+      <div class="preco-box">
+        <div class="preco-de">De R$74,70</div>
+        <div class="preco-por">
+          <span>R$</span>24<span class="cents">,90</span>
+        </div>
+        <div class="preco-detalhe">Pagamento único · Acesso imediato · Para sempre</div>
+      </div>
+
+      <a href="https://mundoconhecimento.mycartpanda.com/checkout/211885139:1" class="cta-btn-gold">
+        QUERO O COMBO AGORA →
+      </a>
+
+      <div class="garantia-box">
+        🛡️ Garantia de 7 dias. Se não gostar, devolvemos 100% do seu dinheiro.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GARANTIA -->
+<section class="sec-garantia">
+  <div class="container">
+    <div class="garantia-inner">
+      <span class="g-big">🛡️</span>
+      <h3>Risco zero pra você</h3>
+      <p>
+        Se em até 7 dias você não ficar satisfeita com o Combo Receitas do Dia a Dia por qualquer motivo — basta mandar uma mensagem e devolvemos <strong>100% do seu dinheiro</strong>, sem perguntas, sem burocracia.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p><strong>Combo Receitas do Dia a Dia</strong> — Mundo Conhecimento</p>
+  <p>Produto digital · Entrega imediata após pagamento</p>
+  <p style="margin-top:10px; font-size:12px;">© 2025 Mundo Conhecimento · Todos os direitos reservados</p>
+</footer>
+
+<script>
+  (function() {
+    var track = document.getElementById('carrosselTrack');
+    var dotsContainer = document.getElementById('carrDots');
+    var slides = track ? track.querySelectorAll('.carr-slide') : [];
+    var total = slides.length;
+    var atual = 0;
+    var visiveis = 3;
+
+    function getVisiveis() {
+      var w = window.innerWidth;
+      if (w <= 400) return 1;
+      if (w <= 600) return 2;
+      return 3;
+    }
+
+    function calcularLargura() {
+      visiveis = getVisiveis();
+      var outer = track.parentElement;
+      var gap = 16;
+      var largura = (outer.offsetWidth - gap * (visiveis - 1)) / visiveis;
+      slides.forEach(function(s) { s.style.width = largura + 'px'; s.style.minWidth = largura + 'px'; });
+      return largura;
+    }
+
+    function maxIndex() { return Math.max(0, total - visiveis); }
+
+    function moverPara(index) {
+      var largura = calcularLargura();
+      var gap = 16;
+      atual = Math.min(Math.max(index, 0), maxIndex());
+      track.style.transform = 'translateX(-' + (atual * (largura + gap)) + 'px)';
+      atualizarDots();
+    }
+
+    function atualizarDots() {
+      var dots = dotsContainer.querySelectorAll('.carr-dot');
+      dots.forEach(function(d, i) {
+        d.classList.toggle('ativo', i === atual);
+      });
+    }
+
+    function criarDots() {
+      dotsContainer.innerHTML = '';
+      var max = maxIndex();
+      for (var i = 0; i <= max; i++) {
+        var btn = document.createElement('button');
+        btn.className = 'carr-dot' + (i === 0 ? ' ativo' : '');
+        btn.setAttribute('aria-label', 'Slide ' + (i + 1));
+        (function(idx) { btn.addEventListener('click', function() { moverPara(idx); }); })(i);
+        dotsContainer.appendChild(btn);
+      }
+    }
+
+    window.moverCarrossel = function(dir) { moverPara(atual + dir); };
+
+    window.addEventListener('resize', function() {
+      calcularLargura();
+      criarDots();
+      moverPara(0);
+    });
+
+    if (track && total > 0) {
+      calcularLargura();
+      criarDots();
+      moverPara(0);
+    }
+  })();
+</script>
+
+</body>
+</html>

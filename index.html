@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Combo Receitas do Dia a Dia</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Nunito:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  🔥 Oferta exclusiva para membros do grupo <span>por tempo limitado</span>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="badge-exclusivo">
+    <span class="dot"></span>
+    Novidade exclusiva para o grupo
+  </div>
+
+  <h1>
+    Mais de <em>700 receitas</em><br>
+    pra transformar sua<br>
+    cozinha do dia a dia
+  </h1>
+
+  <p class="hero-sub">
+    <strong>3 guias completos num único combo:</strong> ovos, receitas sem restrição e sobremesas saudáveis. Tudo que você precisa pra cozinhar bem sem complicar.
+  </p>
+
+  <div class="hero-img-placeholder">
+    <img src="public/hero.jpg" alt="Combo Receitas do Dia a Dia">
+  </div>
+
+  <div class="stats-row">
+    <div class="stat-pill">🥚 365 receitas de ovos</div>
+    <div class="stat-pill">🌿 +300 sem restrição</div>
+    <div class="stat-pill">🍮 +100 sobremesas</div>
+  </div>
+
+  <a href="https://mundoconhecimento.mycartpanda.com/checkout/211885139:1" class="cta-btn">
+    QUERO O COMBO AGORA →
+  </a>
+
+  <div class="preco-hero">
+    De <s>R$74,70</s> por apenas <strong>R$24,90</strong> — pagamento único
+  </div>
+
+  <div class="garantia-mini">
+    🛡️ Garantia de 7 dias. Se não gostar, devolvemos tudo
+  </div>
+</section>
+
+<!-- DOR -->
+<section class="sec-dor">
+  <div class="container">
+    <h2 class="section-title">Você se identifica com alguma dessas? 👇</h2>
+    <p class="section-sub">Se sim, esse combo foi feito exatamente pra você.</p>
+    <div class="dor-grid">
+      <div class="dor-card">
+        <span class="dor-icon">😩</span>
+        <p><strong>Todo dia a mesma dúvida</strong> "o que eu faço hoje?" e sempre acaba no improviso.</p>
+      </div>
+      <div class="dor-card">
+        <span class="dor-icon">🥚</span>
+        <p><strong>Faz ovos do mesmo jeito</strong> há anos e não sabe que dá pra fazer 365 pratos completamente diferentes.</p>
+      </div>
+      <div class="dor-card">
+        <span class="dor-icon">🚫</span>
+        <p><strong>Tem restrição alimentar na família</strong> e não sabe o que cozinhar sem abrir mão do sabor.</p>
+      </div>
+      <div class="dor-card">
+        <span class="dor-icon">🍰</span>
+        <p><strong>Quer comer sobremesa sem culpa</strong> mas não encontra receitas saudáveis que realmente sejam gostosas.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUTOS -->
+<section class="sec-produtos">
+  <div class="container">
+    <h2 class="section-title">O que vem no combo 📦</h2>
+    <p class="section-sub">3 guias completos, acesso imediato, pra sempre.</p>
+    <div class="produtos-grid">
+      <div class="produto-card escuro">
+        <span class="p-icon">🥚</span>
+        <span class="p-num">365</span>
+        <h3>Maneiras de Preparar Ovos</h3>
+        <p>Uma receita diferente pra cada dia do ano do café da manhã ao jantar.</p>
+      </div>
+      <div class="produto-card claro">
+        <span class="p-icon">🌿</span>
+        <span class="p-num">+300</span>
+        <h3>Receitas Sem Açúcar, Glúten e Lactose</h3>
+        <p>Pra quem tem restrição mas não quer abrir mão do sabor no dia a dia.</p>
+      </div>
+      <div class="produto-card rosa">
+        <span class="p-icon">🍮</span>
+        <span class="p-num">+100</span>
+        <h3>Receitas de Sobremesas Saudáveis</h3>
+        <p>Doces gostosos e nutritivos pra toda a família sem culpa nenhuma.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CARROSSEL -->
+<section class="sec-carrossel">
+  <div class="container">
+    <h2 class="section-title">Você está preparada para incluir receitas gostosas como essas no seu dia a dia?</h2>
+    <p class="section-sub">Olha só o que te espera dentro do combo 👇</p>
+    <div class="carrossel-wrapper">
+      <button class="carr-btn carr-prev" onclick="moverCarrossel(-1)" aria-label="Anterior">&#8249;</button>
+      <div class="carrossel-track-outer">
+        <div class="carrossel-track" id="carrosselTrack">
+          <div class="carr-slide"><img src="public/1.jpg" alt="Receita 1"></div>
+          <div class="carr-slide"><img src="public/2.jpg" alt="Receita 2"></div>
+          <div class="carr-slide"><img src="public/3.jpg" alt="Receita 3"></div>
+          <div class="carr-slide"><img src="public/4.jpg" alt="Receita 4"></div>
+          <div class="carr-slide"><img src="public/5.jpg" alt="Receita 5"></div>
+          <div class="carr-slide"><img src="public/6.jpg" alt="Receita 6"></div>
+          <div class="carr-slide"><img src="public/7.jpg" alt="Receita 7"></div>
+          <div class="carr-slide"><img src="public/8.jpg" alt="Receita 8"></div>
+          <div class="carr-slide"><img src="public/9.jpg" alt="Receita 9"></div>
+          <div class="carr-slide"><img src="public/10.jpg" alt="Receita 10"></div>
+          <div class="carr-slide"><img src="public/11.jpg" alt="Receita 11"></div>
+          <div class="carr-slide"><img src="public/12.jpg" alt="Receita 12"></div>
+        </div>
+      </div>
+      <button class="carr-btn carr-next" onclick="moverCarrossel(1)" aria-label="Próximo">&#8250;</button>
+    </div>
+    <div class="carr-dots" id="carrDots"></div>
+  </div>
+</section>
+
+<!-- OFERTA -->
+<section class="sec-oferta" id="oferta">
+  <div class="container">
+    <div class="oferta-box">
+      <div class="titulo">Combo Receitas do Dia a Dia</div>
+      <div class="subtitulo">3 guias · +700 receitas · Acesso imediato</div>
+
+      <ul class="inclui-lista">
+        <li>365 Maneiras de Preparar Ovos 🥚</li>
+        <li>+300 Receitas Sem Açúcar, Glúten e Lactose 🌿</li>
+        <li>+100 Receitas de Sobremesas Saudáveis 🍮</li>
+        <li>Acesso vitalício pelo celular ou computador</li>
+        <li>Garantia total de 7 dias</li>
+      </ul>
+
+      <div class="preco-box">
+        <div class="preco-de">De R$74,70</div>
+        <div class="preco-por">
+          <span>R$</span>24<span class="cents">,90</span>
+        </div>
+        <div class="preco-detalhe">Pagamento único · Acesso imediato · Para sempre</div>
+      </div>
+
+      <a href="https://mundoconhecimento.mycartpanda.com/checkout/211885139:1" class="cta-btn-gold">
+        QUERO O COMBO AGORA →
+      </a>
+
+      <div class="garantia-box">
+        🛡️ Garantia de 7 dias. Se não gostar, devolvemos 100% do seu dinheiro.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GARANTIA -->
+<section class="sec-garantia">
+  <div class="container">
+    <div class="garantia-inner">
+      <span class="g-big">🛡️</span>
+      <h3>Risco zero pra você</h3>
+      <p>
+        Se em até 7 dias você não ficar satisfeita com o Combo Receitas do Dia a Dia por qualquer motivo — basta mandar uma mensagem e devolvemos <strong>100% do seu dinheiro</strong>, sem perguntas, sem burocracia.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p><strong>Combo Receitas do Dia a Dia</strong></p>
+  <p>Produto digital · Entrega imediata após pagamento</p>
+  <p style="margin-top:10px; font-size:12px;">© 2026 Mundo Conhecimento · Todos os direitos reservados</p>
+</footer>
+
+<script src="script.js"></script>
+
+</body>
+</html>
