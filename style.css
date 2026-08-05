@@ -169,6 +169,8 @@ body {
 .preco-hero { margin-top: 18px; font-size: 15px; color: var(--texto-muted); }
 .preco-hero strong { font-size: 28px; color: var(--marrom); font-weight: 800; }
 .preco-hero s { opacity: 0.5; }
+.preco-hero-img { margin-top: 18px; max-width: 360px; width: 100%; margin-left: auto; margin-right: auto; }
+.preco-hero-img img { width: 100%; display: block; }
 .garantia-mini {
   display: flex; align-items: center; justify-content: center;
   gap: 6px; font-size: 13px; color: var(--texto-muted); margin-top: 10px;
@@ -338,7 +340,7 @@ section { padding: 64px 24px; }
 
 /* OFERTA */
 .sec-oferta {
-  background: linear-gradient(135deg, var(--marrom) 0%, var(--marrom-medio) 100%);
+  background: var(--marrom);
   color: white;
 }
 .oferta-box {
