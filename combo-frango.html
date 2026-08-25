@@ -110,6 +110,9 @@
   }
   .hero-sub strong { color: var(--marrom); font-weight: 800; }
 
+  .hero-img-placeholder { max-width: 680px; width: 100%; margin: 0 auto 36px; display: block; }
+  .hero-img-placeholder img { width: 100%; border-radius: 20px; box-shadow: 0 12px 48px rgba(62,31,0,0.18); display: block; }
+
   .stats-row {
     display: flex;
     justify-content: center;
@@ -344,6 +347,7 @@
     color: var(--dourado);
   }
   .oferta-box .subtitulo { font-size: 16px; opacity: 0.8; margin-bottom: 28px; }
+  .oferta-img { max-width: 100%; height: auto; display: block; margin: 0 auto 24px; border-radius: 16px; }
   .inclui-lista {
     list-style: none;
     text-align: left;
@@ -476,11 +480,9 @@
     <strong>30 marinadas +70 receitas com frango + 15 farofas caseiras</strong>, tudo num único combo pra você nunca mais fazer frango sem graça.
   </p>
 
-  <!-- IMAGEM DO COMBO AQUI — substitua este comentário por:
-  <div style="max-width:680px;width:100%;margin:0 auto 36px;display:block;">
-    <img src="sua-imagem.jpg" alt="Combo Frango Perfeito" style="width:100%;border-radius:20px;box-shadow:0 12px 48px rgba(62,31,0,0.18);">
+  <div class="hero-img-placeholder">
+    <img src="assets/hero-frango.jpg" alt="Combo Frango Perfeito">
   </div>
-  -->
 
   <div class="stats-row">
     <div class="stat-pill">🧂 30 marinadas</div>
@@ -581,6 +583,8 @@
 <section class="sec-oferta" id="oferta">
   <div class="container">
     <div class="oferta-box">
+      <img src="assets/price-frango.jpg" alt="Combo Frango Perfeito" class="oferta-img">
+
       <div class="titulo">Combo Frango Perfeito 🍗</div>
       <div class="subtitulo">3 guias · +115 receitas e marinadas · Acesso imediato</div>
 
